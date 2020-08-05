@@ -3,7 +3,7 @@ const validator = require("validator")
 const bcrypt = require("bcryptjs")
 const md5 = require("md5")
 const { promiseImpl } = require('ejs')
-
+const sendgrid = require('@sendgrid/mail')
 
 let User = function(data, getAvatar){
     //takes the data that just got entered into a parameter we can access again later. 

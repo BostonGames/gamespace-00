@@ -5,6 +5,7 @@ const { request, post } = require('../app')
 const jwt = require('jsonwebtoken')
 const { response } = require('express')
 
+
 exports.apiGetPostsByUsername = async function(req, res) {
     try{
         let creatorDoc = await User.findByUsername(req.params.username)
