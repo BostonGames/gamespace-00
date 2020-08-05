@@ -1,0 +1,36 @@
+<%- include('includes/header') %>
+<%- include('includes/bg') %>
+
+  
+<div class="container py-md-5 container--narrow">
+
+  <%- include('includes/flash') %>
+
+  <form action="/create-post" method="POST">
+    <div class="form-group">
+      <label for="post-title" class="mb-1"><small>Title</small></label>
+      <input required name="title" id="post-title" class="form-control form-control-lg form-control-title" type="text" placeholder="" autocomplete="off">
+    </div>
+
+    <div class="form-group">
+      <label for="post-body" class="mb-1"><small>Body Content</small></label>
+      <textarea required name="body" id="post-body" class="body-content tall-textarea form-control" type="text"></textarea>
+    </div>
+
+    <select required name="greeting" id="post=greeting" class="form-control form-control-lg">
+        <option value="greeting-starter" selected disabled hidden>Choose a greeting</option>
+        <option value="greeting-0">Greetings!</option>
+        <option value="greeting-1">Hello</option>
+        <option value="greeting-2">Meow there!</option>
+        <option value="greeting-3">Mew</option>      
+    </select>
+    <br>
+    
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+    <button class="btn btn-primary">Save New Post</button>
+  </form>
+</div>
+  
+  <%- include('includes/footer') %>
+  

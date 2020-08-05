@@ -1,0 +1,38 @@
+<%- include('includes/header') %>
+<%- include('includes/bg') %>
+  
+  <div class="post-container container py-md-5 container--narrow">
+
+    <%- include('includes/flash') %>
+
+
+    <div class="d-flex justify-content-between">
+      <h2><%= post.greeting %></h2>
+      
+      <% if(post.isVisitorOwner) { %>
+      <span class="pt-2">
+        <a href="/post/<%= post._id %>/edit" class="text-primary mr-2" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit"></i></a>
+        <form class="delete-post-form d-inline" action="/post/<%= post._id %>/delete" method="POST">
+
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+          <button class="delete-post-button text-danger" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash"></i></button>
+        </form>
+      </span>
+      <% } %>
+
+    </div>
+      
+    <p class="small mb-4">
+      <a href="/profile/<%= post.createdBy.username %>"><img class="avatar-small" style="background-color: <%= String(post.createdBy.avatarbgcolor) %>;" src="<%= post.createdBy.avatar %>"></a>
+      Posted by <a href="/profile/<%= post.createdBy.username %>"><%= post.createdBy.username %></a> on <%= post.createdDate.getMonth() + 1 %> /<%= post.createdDate.getDate() %> /<%= post.createdDate.getFullYear() %></p>
+
+    <div class="body-content">
+      <p><%- filterUserHTML(post.body) %></p>  
+    </div>
+    
+
+  </div>
+  <br>
+
+  <%- include('includes/footer') %>
