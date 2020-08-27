@@ -5,15 +5,9 @@
 
     <%- include('includes/flash') %>
 
-    <div class="text-center" style="color:#6e6e6e">
-      <div class="box-container-1"><h2>Welcome to your galaxy, <strong><%= user.avatarnameFull %></strong></h2></div>
-      <br><br><br>
-    </div> 
-
     <% if (posts.length) { %>
-      <div class="box-container-0">
-
-      <h3 class="postboard-header-text text-center mb-4">Latest meowings from those in your Galaxy:</h3>
+      
+      <h2 class="text-center mb-4">Latest from those in your Universe:</h2>
       <div class="list-group">
         <% posts.forEach(function(post){ %>
         <a href="/post/<%= post._id %>" class="list-group-item list-group-item-action">
@@ -21,25 +15,15 @@
             <strong><%= post.greeting %> - <%= post.title %></strong> <span class="text-muted small">by <%= post.createdBy.username %> on <%= post.createdDate.getMonth() + 1 %> /<%= post.createdDate.getDate() %> /<%= post.createdDate.getFullYear() %></span>
         </a>  
         <% }) %>
-      
-      </div>
+
     </div>
 
     <% } else { %>
 
-      <div class="text-center" style="color:#6e6e6e">        
-        
+      <div class="text-center">
+        <h2>Hello <strong><%= user.username %></strong>, your feed is empty.</h2>
+        <p class="lead">Your feed displays the latest posts from the people you follow. If you don&rsquo;t have any friends to follow that&rsquo;s okay; you can use the &ldquo;Search&rdquo; feature in the top menu bar to find content written by people with similar interests and then follow them.</p>
       </div>  
-
-      <div class="screenContentContainer0"> 
-        
-
-        <div class="mainSpeechBubble sb2">You can find other alien cats in the universe in the CatChat<i class="fas fa-comment"></i> </span></div>          
-      
-      <div class="meowmersWrapper">
-    <div style="flex-basis:200px" class="meowmers"> </div>
-        </div>
-    </div>
   
       <% } %>
 

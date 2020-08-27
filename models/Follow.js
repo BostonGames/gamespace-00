@@ -19,7 +19,7 @@ Follow.prototype.validate = async function(action) {
     if (followedAccount) {
         this.followedID = followedAccount._id
     } else {
-        this.errors.push("Interesting. It would appear this being does not exist in the Game Space dimension")
+        this.errors.push("Interesting. It would appear this being does not exist in this dimension")
     }
 
     let doesFollowAlreadyExist = await followsCollection.findOne({followedID: this.followedID, creatorID: new ObjectID(this.creatorID)})
@@ -92,26 +92,34 @@ Follow.isVisitorFollowing = async function (followedID, visitorID) {
 Follow.getFollowersById = function(id) {
     return new Promise(async function(resolve, reject) {
       try {
+        console.log('starting Follow.getFollowersById funciton')
+        
         let followers = await followsCollection.aggregate([
-          {$match: {followedID: id}},
-          {$lookup: {from: "users", localField: "creatorID", foreignField: "_id", as: "userDoc"}},
-          {$project: {
-            username: {$arrayElemAt: ["$userDoc.username", 0]},
-            email: {$arrayElemAt: ["$userDoc.email", 0]},
-            avatar: {$arrayElemAt: ["$userDoc.avatar", 0]},
-            avatarbgcolor: {$arrayElemAt: ["$userDoc.avatarbgcolor", 0]}
-          }}
-        ]).toArray()
+            {$match: {followedID: id}},
+            {$lookup: {from: "users", localField: "creatorID", foreignField: "_id", as: "userDoc"}},
+            {$project: {
+              username: {$arrayElemAt: ["$userDoc.username", 0]},
+              email: {$arrayElemAt: ["$userDoc.email", 0]},
+              avatarnameFull: {$arrayElemAt: ["$userDoc.avatarnameFull", 0]},
+              avatar: {$arrayElemAt: ["$userDoc.avatar", 0]},
+              avatarbgcolor: {$arrayElemAt: ["$userDoc.avatarbgcolor", 0]}
+            }}
+          ]).toArray()
+
 
         followers = followers.map(function(follower) {
           let user = new User(follower, true)
           return {
               username: follower.username, 
+              avatarnameFull: follower.avatarnameFull,
               avatar: user.avatar,
               avatarbgcolor: follower.avatarbgcolor}
         })
         resolve(followers)
+
+        console.log(followers)
       } catch {
+        console.log('something went wrong in >> Follow.getFollowersById funciton')
         reject()
       }
     })
@@ -127,20 +135,24 @@ Follow.getFollowersById = function(id) {
           {$project: {
             username: {$arrayElemAt: ["$userDoc.username", 0]},
             email: {$arrayElemAt: ["$userDoc.email", 0]},
+            avatarnameFull: {$arrayElemAt: ["$userDoc.avatarnameFull", 0]},
             avatar: {$arrayElemAt: ["$userDoc.avatar", 0]},
             avatarbgcolor: {$arrayElemAt: ["$userDoc.avatarbgcolor", 0]}
           }}
         ]).toArray()
 
+
         following = following.map(function(follow) {
           let user = new User(follow, true)
           return {
               username: follow.username, 
+              avatarnameFull: follow.avatarnameFull,
               avatar: user.avatar,
               avatarbgcolor: follow.avatarbgcolor}
         })
         resolve(following)
       } catch {
+        console.log("there must be an error in the code, check in Follow > getFollowingById")
         reject()
       }
     })

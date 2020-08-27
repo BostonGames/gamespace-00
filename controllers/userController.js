@@ -81,9 +81,12 @@ exports.apiMustBeLoggedIn = function(req, res, next){
 exports.login = function(req, res){
     let user = new User(req.body)
     user.login().then(function(result){
-       //allows users to have persistent data so stuff is saved when they login
+       // allows users to have persistent data 
+       // so their profile information is available 
+       // for their user experience when they login
         req.session.user = {
             username: user.data0.username, 
+            avatarnameFull: user.data0.avatarnameFull,
             avatarbgcolor: user.data0.avatarbgcolor, 
             avatar: user.avatar, 
             _id: user.data0._id
@@ -121,10 +124,14 @@ exports.logout = function(req, res){
 }
 
 exports.register = function(req, res){
+    //canDelete, just seeing if user-entered data gets pulled from Reg form
+    console.log(req.body)
+    
     let user = new User(req.body)
     user.register().then(() => {
         req.session.user = {
-            username: user.data0.username, 
+            username: user.data0.username,             
+            avatarnameFull: user.data0.avatarnameFull,
             avatarbgcolor: user.data0.avatarbgcolor, 
             avatar: user.avatar, 
             _id: user.data0._id
@@ -137,7 +144,7 @@ exports.register = function(req, res){
             req.flash('regErrors', error)
         })
         req.session.save(function(){
-            res.redirect('/')
+            res.redirect('/')            
         })
     })
 
@@ -175,6 +182,7 @@ exports.profilePostsScreen = function(req, res){
            currentPage: "posts",
            posts: posts,
            profileUsername: req.profileUser.username,
+           profileAvatarname: req.profileUser.avatarnameFull,
            profileAvatar: req.profileUser.avatar,
            profileAvatarBGcolor: req.profileUser.avatarbgcolor,
            isFollowing: req.isFollowing,
@@ -182,7 +190,9 @@ exports.profilePostsScreen = function(req, res){
            counts: {postCount: req.postCount, followerCount: req.followerCount, followingCount: req.followingCount}
         })
     }).catch(function(){
+        console.log("there must be an error in the code, check in userController > profilePostsScreen")
         res.render("404")
+
     })    
 }
 
@@ -194,17 +204,17 @@ exports.profileFollowersScreen = async function(req, res) {
         currentPage: "followers",
         followers: followers,
         profileUsername: req.profileUser.username,
+        profileAvatarname: req.profileUser.avatarnameFull,
         profileAvatar: req.profileUser.avatar,
         profileAvatarBGcolor: req.profileUser.avatarbgcolor,
         isFollowing: req.isFollowing,
         isVisitorsProfile: req.isVisitorsProfile,
         counts: {postCount: req.postCount, followerCount: req.followerCount, followingCount: req.followingCount}
       })
+      console.log("the userController > exports.profileFollowerScreen funciton returned: ")
       console.log(followers)
     } catch {
-        console.log("there must be an error in the code, check in userController > profileFollowerScreen")
-        res.render("404")
-        
+        res.render("404")        
     }  
 } 
 
@@ -215,16 +225,17 @@ exports.profileFollowingScreen = async function(req, res) {
         currentPage: "following",
         following: following,
         profileUsername: req.profileUser.username,
+        profileAvatarname: req.profileUser.avatarnameFull,
         profileAvatar: req.profileUser.avatar,
         profileAvatarBGcolor: req.profileUser.avatarbgcolor,
         isFollowing: req.isFollowing,
         isVisitorsProfile: req.isVisitorsProfile,
         counts: {postCount: req.postCount, followerCount: req.followerCount, followingCount: req.followingCount}
       })
+      console.log("the userController > exports.profileFollowingScreen funciton returned: ")
       console.log(following)
     } catch {
         console.log("there must be an error in the code, check in userController > profileFolloingScreen")
-        res.render("404")
-        
+        res.render("404")        
     }  
 }

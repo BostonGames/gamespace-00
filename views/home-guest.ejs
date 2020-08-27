@@ -3,49 +3,394 @@
 
 <div class="container py-md-5">
 
-  <%- include('includes/flash') %>
 
 
-  <div class="row align-items-center">
-    <div class="col-lg-7 py-3 py-md-5">
-      <h1 class="display-3">Remember Writing?</h1>      
-      <p class="lead ">Are you sick of short tweets and impersonal &ldquo;shared&rdquo; posts that are reminiscent of the late 90&rsquo;s email forwards? We believe getting back to actually writing is the key to enjoying the internet again.</p>
+<div class="row align-items-center">
+  <div class="col-lg-7 py-3 py-md-5">
+    
+    <div class="screenContentContainer0 meowmersThoughts">    
+          <% regErrors.forEach(function(message) { %>
+            <div class="alert alert-danger0 alert-success0 small"><%= message %></div>
+          <% }) %>
+          
+          <%- include('includes/flash-thoughts') %></div>
+
+    <div class="screenContentContainer0"> 
+      
+        <div class="mainSpeechBubble sb2">Greetings, Hooman</div>          
+      
+      <div class="meowmersWrapper">
+    <div style="flex-basis:200px" class="meowmers"> </div>
+        </div>
     </div>
-    <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5">
-      <form action="/register" method="POST" id="registration-form">
+         
+    <p class="text-muted" style="text-align:center">Come join Meowmers in the Boston Games Universe.<br><br>Become an alilen cat. <br>Meet new friends and add them to your own personal galaxy.</p>
+  </div>
+  <div class="userSpeechBubble sb1 col-lg-5 pl-lg-5 pb-3 py-lg-5">
 
-        <% regErrors.forEach(function(message) { %>
-          <div class="alert alert-danger small"><%= message %></div>
-        <% }) %>
+    
+    
+
+        <form action="/register" method="POST" id="registration-form">
+         
+
 
           <div class="form-group">
-            <label for="username-register" class="mb-1"><small>Username</small></label>
+            <label for="username-register" class="labelUserForm mb-1"><small>Username (cannot change this)</small></label>
             <input name="username" id="username-register" class="form-control" type="text" placeholder="Pick a username" autocomplete="off">
           </div>
-          
-          <div class="form-group">
-            <label for="email-register" class="mb-1"><small>Email</small></label>
-            <input name="email" id="email-register" class="form-control" type="text" placeholder="you@example.com" autocomplete="off">
-          </div>
-          
-          <div class="form-group">
-            <label for="password-register" class="mb-1"><small>Password</small></label>
-            <input name="password" id="password-register" class="form-control" type="password" placeholder="Create a password">
-          </div>
 
           <div class="form-group">
-            <label for="avatarbgcolor-register" class="mb-1"><small>Favorite Color</small></label>
-            <input name="avatarbgcolor" id="avatarbg-register" class="form-control" type="color" value="#ff2f00">
-          </div>
-          
-          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <label for="avatarname-register" class="labelUserForm mb-1"><small>Alien Avatar Name</small></label>        
+  <div class="flex-dropdown-wrapper">       
+       <div class="nameElement">
+          <select required name="avatarname1st" id="avatarname1st-register" class="dropdownText0 form-control form-control-sm">
+            <option value="avatarname0-starter" selected disabled hidden>1st</option>
+            <option value="avatarname0-1">Ahkna</option>
+            <option value="avatarname0-2">Apollo</option>
+            <option value="avatarname0-3">Athena</option> 
+            <option value="avatarname0-4">Ayra</option>
+            <option value="avatarname0-5">Biggles</option>
+            <option value="avatarname0-6">Bigglesworth</option>
+            <option value="avatarname0-7">Bojangles</option> 
+            <option value="avatarname0-8">Buttons</option>
+            <option value="avatarname0-9">Catmahd</option>
+            <option value="avatarname0-10">Catna</option>
+            <option value="avatarname0-11">Echo</option> 
+            <option value="avatarname0-12">Falkor</option>
+            <option value="avatarname0-13">Faria</option>
+            <option value="avatarname0-14">Felix</option>
+            <option value="avatarname0-15">Floof</option> 
+            <option value="avatarname0-16">Floofy</option>
+            <option value="avatarname0-17">Fuzz</option>
+            <option value="avatarname0-18">Fuzzy</option>
+            <option value="avatarname0-19">Gaius</option> 
+            <option value="avatarname0-20">Galactica</option>
+            <option value="avatarname0-21">Hissington</option>
+            <option value="avatarname0-22">Idris</option>
+            <option value="avatarname0-23">Invador</option>
+            <option value="avatarname0-24">Kiki</option>
+            <option value="avatarname0-25">Lil</option>
+            <option value="avatarname0-26">Luda</option>
+            <option value="avatarname0-27">Luffy</option> 
+            <option value="avatarname0-28">Lulu</option>
+            <option value="avatarname0-29">Luna</option>
+            <option value="avatarname0-30">Meower</option>
+            <option value="avatarname0-31">Meowing</option>
+            <option value="avatarname0-32">Meowington</option>
+            <option value="avatarname0-33">Meowjax</option> 
+            <option value="avatarname0-34">Meowsalot</option>
+            <option value="avatarname0-35">Meowsif</option>
+            <option value="avatarname0-36">Meowsly</option>
+            <option value="avatarname0-37">Merlin</option> 
+            <option value="avatarname0-38">Merry</option>
+            <option value="avatarname0-39">Mewing</option>
+            <option value="avatarname0-40">Mewmers</option>
+            <option value="avatarname0-41">Mewmew</option>
+            <option value="avatarname0-42">Mewsley</option>
+            <option value="avatarname0-43">Mittens</option> 
+            <option value="avatarname0-44">Nero</option>
+            <option value="avatarname0-45">Nova</option>
+            <option value="avatarname0-46">Nyla</option>
+            <option value="avatarname0-47">Nyota</option> 
+            <option value="avatarname0-48">Nyoto</option>
+            <option value="avatarname0-49">Oreo</option>
+            <option value="avatarname0-50">Patches</option>
+            <option value="avatarname0-51">Pawsley</option>
+            <option value="avatarname0-52">Photon</option>
+            <option value="avatarname0-53">Pica</option> 
+            <option value="avatarname0-54">Pixar</option>
+            <option value="avatarname0-55">Pixel</option>
+            <option value="avatarname0-56">Pouncer</option>
+            <option value="avatarname0-57">Prrsley</option> 
+            <option value="avatarname0-58">Purring</option>
+            <option value="avatarname0-59">Quasar</option>
+            <option value="avatarname0-60">Ryzar</option>
+            <option value="avatarname0-61">Ryden</option>
+            <option value="avatarname0-62">Ryder</option>
+            <option value="avatarname0-63">Ryo</option> 
+            <option value="avatarname0-64">Salem</option>
+            <option value="avatarname0-65">Scratcherson</option>
+            <option value="avatarname0-66">Scratches</option>
+            <option value="avatarname0-67">Scratchington</option> 
+            <option value="avatarname0-68">Scratchy</option>
+            <option value="avatarname0-69">Shadow</option>
+            <option value="avatarname0-70">Squancherly</option>
+            <option value="avatarname0-71">Squanchington</option>
+            <option value="avatarname0-72">Squanchy</option>
+            <option value="avatarname0-73">Stella</option> 
+            <option value="avatarname0-74">Trillion</option>
+            <option value="avatarname0-75">Trilon</option>
+            <option value="avatarname0-76">Tux</option>
+            <option value="avatarname0-77">Voltron</option> 
+            <option value="avatarname0-78">Voxel</option>
+            <option value="avatarname0-79">Voxen</option>
+            <option value="avatarname0-80">Vrillion</option>
+            <option value="avatarname0-81">Vyrtex</option>
+            <option value="avatarname0-82">Xanxia</option>
+            <option value="avatarname0-83">Xavier</option> 
+            <option value="avatarname0-84">Xerxes</option>
+            <option value="avatarname0-85">Xyla</option>
+            <option value="avatarname0-86">Xynar</option>
+            <option value="avatarname0-87">Zareen</option> 
+            <option value="avatarname0-88">Zarina</option>
+            <option value="avatarname0-89">Zero</option>
+            <option value="avatarname0-90">Zora</option>
+            <option value="avatarname0-91">Zoran</option>      
+          </select>
+        </div>
+        <div class="nameElement">
+          <select required name="avatarname2nd" id="avatarname2nd-register" class="form-control form-control-sm">
+            <option value="avatarname0-starter" selected disabled hidden>2nd</option>
+            <option value="avatarname0-0">- none -</option>
+            <option value="avatarname0-1">Ahkna</option>
+            <option value="avatarname0-2">Apollo</option>
+            <option value="avatarname0-3">Athena</option> 
+            <option value="avatarname0-4">Ayra</option>
+            <option value="avatarname0-5">Biggles</option>
+            <option value="avatarname0-6">Bigglesworth</option>
+            <option value="avatarname0-7">Bojangles</option> 
+            <option value="avatarname0-8">Buttons</option>
+            <option value="avatarname0-9">Catmahd</option>
+            <option value="avatarname0-10">Catna</option>
+            <option value="avatarname0-11">Echo</option> 
+            <option value="avatarname0-12">Falkor</option>
+            <option value="avatarname0-13">Faria</option>
+            <option value="avatarname0-14">Felix</option>
+            <option value="avatarname0-15">Floof</option> 
+            <option value="avatarname0-16">Floofy</option>
+            <option value="avatarname0-17">Fuzz</option>
+            <option value="avatarname0-18">Fuzzy</option>
+            <option value="avatarname0-19">Gaius</option> 
+            <option value="avatarname0-20">Galactica</option>
+            <option value="avatarname0-21">Hissington</option>
+            <option value="avatarname0-22">Idris</option>
+            <option value="avatarname0-23">Invador</option>
+            <option value="avatarname0-24">Kiki</option>
+            <option value="avatarname0-25">Lil</option>
+            <option value="avatarname0-26">Luda</option>
+            <option value="avatarname0-27">Luffy</option> 
+            <option value="avatarname0-28">Lulu</option>
+            <option value="avatarname0-29">Luna</option>
+            <option value="avatarname0-30">Meower</option>
+            <option value="avatarname0-31">Meowing</option>
+            <option value="avatarname0-32">Meowington</option>
+            <option value="avatarname0-33">Meowjax</option> 
+            <option value="avatarname0-34">Meowsalot</option>
+            <option value="avatarname0-35">Meowsif</option>
+            <option value="avatarname0-36">Meowsly</option>
+            <option value="avatarname0-37">Merlin</option> 
+            <option value="avatarname0-38">Merry</option>
+            <option value="avatarname0-39">Mewing</option>
+            <option value="avatarname0-40">Mewmers</option>
+            <option value="avatarname0-41">Mewmew</option>
+            <option value="avatarname0-42">Mewsley</option>
+            <option value="avatarname0-43">Mittens</option> 
+            <option value="avatarname0-44">Nero</option>
+            <option value="avatarname0-45">Nova</option>
+            <option value="avatarname0-46">Nyla</option>
+            <option value="avatarname0-47">Nyota</option> 
+            <option value="avatarname0-48">Nyoto</option>
+            <option value="avatarname0-49">Oreo</option>
+            <option value="avatarname0-50">Patches</option>
+            <option value="avatarname0-51">Pawsley</option>
+            <option value="avatarname0-52">Photon</option>
+            <option value="avatarname0-53">Pica</option> 
+            <option value="avatarname0-54">Pixar</option>
+            <option value="avatarname0-55">Pixel</option>
+            <option value="avatarname0-56">Pouncer</option>
+            <option value="avatarname0-57">Prrsley</option> 
+            <option value="avatarname0-58">Purring</option>
+            <option value="avatarname0-59">Quasar</option>
+            <option value="avatarname0-60">Ryzar</option>
+            <option value="avatarname0-61">Ryden</option>
+            <option value="avatarname0-62">Ryder</option>
+            <option value="avatarname0-63">Ryo</option> 
+            <option value="avatarname0-64">Salem</option>
+            <option value="avatarname0-65">Scratcherson</option>
+            <option value="avatarname0-66">Scratches</option>
+            <option value="avatarname0-67">Scratchington</option> 
+            <option value="avatarname0-68">Scratchy</option>
+            <option value="avatarname0-69">Shadow</option>
+            <option value="avatarname0-70">Squancherly</option>
+            <option value="avatarname0-71">Squanchington</option>
+            <option value="avatarname0-72">Squanchy</option>
+            <option value="avatarname0-73">Stella</option> 
+            <option value="avatarname0-74">Trillion</option>
+            <option value="avatarname0-75">Trilon</option>
+            <option value="avatarname0-76">Tux</option>
+            <option value="avatarname0-77">Voltron</option> 
+            <option value="avatarname0-78">Voxel</option>
+            <option value="avatarname0-79">Voxen</option>
+            <option value="avatarname0-80">Vrillion</option>
+            <option value="avatarname0-81">Vyrtex</option>
+            <option value="avatarname0-82">Xanxia</option>
+            <option value="avatarname0-83">Xavier</option> 
+            <option value="avatarname0-84">Xerxes</option>
+            <option value="avatarname0-85">Xyla</option>
+            <option value="avatarname0-86">Xynar</option>
+            <option value="avatarname0-87">Zareen</option> 
+            <option value="avatarname0-88">Zarina</option>
+            <option value="avatarname0-89">Zero</option>
+            <option value="avatarname0-90">Zora</option>
+            <option value="avatarname0-91">Zoran</option>      
+          </select>
+        </div>
+        <div class="nameElement">
+          <select required name="avatarname3rd" id="avatarname3rd-register" class="form-control form-control-sm">
+            <option value="avatarname0-starter" selected disabled hidden>3rd</option>
+            <option value="avatarname0-0">- none -</option>
+            <option value="avatarname0-1">Ahkna</option>
+            <option value="avatarname0-2">Apollo</option>
+            <option value="avatarname0-3">Athena</option> 
+            <option value="avatarname0-4">Ayra</option>
+            <option value="avatarname0-5">Biggles</option>
+            <option value="avatarname0-6">Bigglesworth</option>
+            <option value="avatarname0-7">Bojangles</option> 
+            <option value="avatarname0-8">Buttons</option>
+            <option value="avatarname0-9">Catmahd</option>
+            <option value="avatarname0-10">Catna</option>
+            <option value="avatarname0-11">Echo</option> 
+            <option value="avatarname0-12">Falkor</option>
+            <option value="avatarname0-13">Faria</option>
+            <option value="avatarname0-14">Felix</option>
+            <option value="avatarname0-15">Floof</option> 
+            <option value="avatarname0-16">Floofy</option>
+            <option value="avatarname0-17">Fuzz</option>
+            <option value="avatarname0-18">Fuzzy</option>
+            <option value="avatarname0-19">Gaius</option> 
+            <option value="avatarname0-20">Galactica</option>
+            <option value="avatarname0-21">Hissington</option>
+            <option value="avatarname0-22">Idris</option>
+            <option value="avatarname0-23">Invador</option>
+            <option value="avatarname0-24">Kiki</option>
+            <option value="avatarname0-25">Lil</option>
+            <option value="avatarname0-26">Luda</option>
+            <option value="avatarname0-27">Luffy</option> 
+            <option value="avatarname0-28">Lulu</option>
+            <option value="avatarname0-29">Luna</option>
+            <option value="avatarname0-30">Meower</option>
+            <option value="avatarname0-31">Meowing</option>
+            <option value="avatarname0-32">Meowington</option>
+            <option value="avatarname0-33">Meowjax</option> 
+            <option value="avatarname0-34">Meowsalot</option>
+            <option value="avatarname0-35">Meowsif</option>
+            <option value="avatarname0-36">Meowsly</option>
+            <option value="avatarname0-37">Merlin</option> 
+            <option value="avatarname0-38">Merry</option>
+            <option value="avatarname0-39">Mewing</option>
+            <option value="avatarname0-40">Mewmers</option>
+            <option value="avatarname0-41">Mewmew</option>
+            <option value="avatarname0-42">Mewsley</option>
+            <option value="avatarname0-43">Mittens</option> 
+            <option value="avatarname0-44">Nero</option>
+            <option value="avatarname0-45">Nova</option>
+            <option value="avatarname0-46">Nyla</option>
+            <option value="avatarname0-47">Nyota</option> 
+            <option value="avatarname0-48">Nyoto</option>
+            <option value="avatarname0-49">Oreo</option>
+            <option value="avatarname0-50">Patches</option>
+            <option value="avatarname0-51">Pawsley</option>
+            <option value="avatarname0-52">Photon</option>
+            <option value="avatarname0-53">Pica</option> 
+            <option value="avatarname0-54">Pixar</option>
+            <option value="avatarname0-55">Pixel</option>
+            <option value="avatarname0-56">Pouncer</option>
+            <option value="avatarname0-57">Prrsley</option> 
+            <option value="avatarname0-58">Purring</option>
+            <option value="avatarname0-59">Quasar</option>
+            <option value="avatarname0-60">Ryzar</option>
+            <option value="avatarname0-61">Ryden</option>
+            <option value="avatarname0-62">Ryder</option>
+            <option value="avatarname0-63">Ryo</option> 
+            <option value="avatarname0-64">Salem</option>
+            <option value="avatarname0-65">Scratcherson</option>
+            <option value="avatarname0-66">Scratches</option>
+            <option value="avatarname0-67">Scratchington</option> 
+            <option value="avatarname0-68">Scratchy</option>
+            <option value="avatarname0-69">Shadow</option>
+            <option value="avatarname0-70">Squancherly</option>
+            <option value="avatarname0-71">Squanchington</option>
+            <option value="avatarname0-72">Squanchy</option>
+            <option value="avatarname0-73">Stella</option> 
+            <option value="avatarname0-74">Trillion</option>
+            <option value="avatarname0-75">Trilon</option>
+            <option value="avatarname0-76">Tux</option>
+            <option value="avatarname0-77">Voltron</option> 
+            <option value="avatarname0-78">Voxel</option>
+            <option value="avatarname0-79">Voxen</option>
+            <option value="avatarname0-80">Vrillion</option>
+            <option value="avatarname0-81">Vyrtex</option>
+            <option value="avatarname0-82">Xanxia</option>
+            <option value="avatarname0-83">Xavier</option> 
+            <option value="avatarname0-84">Xerxes</option>
+            <option value="avatarname0-85">Xyla</option>
+            <option value="avatarname0-86">Xynar</option>
+            <option value="avatarname0-87">Zareen</option> 
+            <option value="avatarname0-88">Zarina</option>
+            <option value="avatarname0-89">Zero</option>
+            <option value="avatarname0-90">Zora</option>
+            <option value="avatarname0-91">Zoran</option>      
+          </select>
+        </div>  
+        <div class="nameElement">
+          <select required name="avatarname4th" id="avatarname4th-register" class="form-control form-control-sm">         
+            <option value="avatarname0-starter" selected disabled hidden>Gen</option>
+            <option value="avatarname0-0">- none -</option>
+            <option value="avatarname0-1">I</option>
+            <option value="avatarname0-2">II</option>
+            <option value="avatarname0-3">III</option> 
+            <option value="avatarname0-4">IV</option>
+            <option value="avatarname0-5">V</option>
+            <option value="avatarname0-6">VI</option>
+            <option value="avatarname0-7">VII</option> 
+            <option value="avatarname0-8">VIII</option>
+            <option value="avatarname0-9">IX</option>
+            <option value="avatarname0-10">X</option>
+            <option value="avatarname0-11">XII</option> 
+            <option value="avatarname0-12">XIII</option>
+            <option value="avatarname0-13">XIV</option>
+            <option value="avatarname0-14">XV</option>
+            <option value="avatarname0-15">XVI</option> 
+            <option value="avatarname0-16">XVII</option>
+            <option value="avatarname0-17">XVIII</option>
+            <option value="avatarname0-18">XIX</option>
+            <option value="avatarname0-19">XX</option> 
+            <option value="avatarname0-20">XXI</option>
+            <option value="avatarname0-21">XXII</option>
+          </select>
+        </div>
+  </div>
 
-          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Sign up for OurApp</button>
-          
-        </form>
-      </div>
+            
+            <div class="form-group">
+              <label for="email-register" class="labelUserForm mb-1"><small>Email</small></label>
+              <input name="email" id="email-register" class="form-control" type="text" placeholder="hooman@earthmail.com" autocomplete="off">
+            </div>
+            
+            <div class="form-group">
+              <label for="password-register" class="labelUserForm mb-1"><small>Password</small></label>
+              <input name="password" id="password-register" class="form-control" type="password" placeholder="Create a password">
+            </div>
+
+            <div class="form-group">
+              <label for="avatarbgcolor-register" class="labelUserForm mb-1"><small>Favorite Color</small></label>
+              <input name="avatarbgcolor" id="avatarbg-register" class="form-control" type="color" value="#ff2f00">
+            </div>
+            
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+            <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Join Us</button>
+            
+          </form>
     </div>
   </div>
-  
+</div>
+    <div class="spacer"></div>
+</div>
+
+    
+
+
   <%- include('includes/footer') %>
 

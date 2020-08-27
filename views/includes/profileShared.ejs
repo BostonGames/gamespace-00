@@ -1,5 +1,9 @@
-<h2><img class="avatar-small" style="background-color: <%= String(profileAvatarBGcolor) %>;"src="<%= profileAvatar %>"> <%= profileUsername %>  
-    <% if (user && !isVisitorsProfile) {
+
+
+<h2><img class="avatar-profile" style="background-color: <%= String(profileAvatarBGcolor) %>;" src="<%= profileAvatar %>"> <%= profileAvatarname %>  
+    
+  
+  <% if (user && !isVisitorsProfile) {
 
       if(isFollowing){ %>
         <form class="ml-2 d-inline" action="/removeFollow/<%= profileUsername %>" method="POST">
@@ -13,6 +17,8 @@
         </form>
     <% }
     } %>
+
+
   </h2>
 
   <div class="profile-nav nav nav-tabs pt-2 mb-4">

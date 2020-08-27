@@ -1,7 +1,7 @@
 <%- include('includes/header') %>
 <%- include('includes/bg') %>
 
-<div class="container py-md-5 container--narrow">
+<div class="box-container-2 container py-md-5 container--narrow">
 
   <%- include('includes/flash') %>
 
@@ -12,7 +12,7 @@
         <% followers.forEach(function(follower){ %>
         <a href="/profile/<%= follower.username %>" class="list-group-item list-group-item-action">
             <img class="avatar-tiny" style="background-color: <%= String(follower.avatarbgcolor) %>;" src="<%= follower.avatar %>">
-            <strong><%= follower.username %></strong> 
+            <strong><%= follower.avatarnameFull %></strong> 
         </a>  
         <% }) %>
 

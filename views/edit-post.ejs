@@ -1,10 +1,9 @@
 <%- include('includes/header') %>
 <%- include('includes/bg') %>
 
+<div class="container container--narrow align-items-center p-2"><div><%- include('includes/flash') %></div></div> 
   
-<div class="container py-md-5 container--narrow">
-
-    <%- include('includes/flash') %>
+<div class="box-container-2 container py-md-5 container--narrow">
 
   <form action="/post/<%= post._id %>/edit" method="POST">
     <div class="form-group">

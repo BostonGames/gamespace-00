@@ -7,7 +7,10 @@ const csrf = require('csurf')
 const app = express()
 const sanitizeHTML = require('sanitize-html')
 
+//test: images
+app.use(express.static( "public" ))
 
+// tells express to add user-submitted data to our request object (req.body)
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 
@@ -117,7 +120,9 @@ io.on('connection', function(socket) {
             // socket.emit would send that message to just the browser that sent the request, but io.emit will send to ALL connected users INCLUDING the user that sent the message            
             // socket.broadcast.emit will send the data to all browsers EXCEPT the one who wrote the message. more efficient
             socket.broadcast.emit('chatMessageFromServer', {
-                message: sanitizeHTML(data.message, {allowedTags: [], allowedAttributes: {}}),
+                message: sanitizeHTML(data.message, {allowedTags: ['strong'], allowedAttributes: {}}),
+                chatPunctuation: sanitizeHTML(data.chatPunctuation, {allowedTags: [], allowedAttributes: {}}),
+                chatTextColor: sanitizeHTML(data.chatTextColor, {allowedTags: [], allowedAttributes: {}}),
                 username: user.username,
                 avatar: user.avatar,
                 avatarbgcolor: user.avatarbgcolor

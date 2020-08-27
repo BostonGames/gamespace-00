@@ -21,12 +21,18 @@ User.prototype.cleanUp = function(){
     if (typeof(this.data0.email) != "string"){this.data0.email = ""}
     if (typeof(this.data0.password) != "string"){this.data0.password = ""}
 
+    //THIS IS THE DATA THAT WILL BE STORED IN THE DB - add user info here    
     // get rid of any bogus properties. maintain good data integrity so users cannot inject bogus or malicious data
     this.data0 = {
         //trim method removes blank spaces
-        username: this.data0.username.trim(),
+        username: this.data0.username.trim().toLowerCase(),
         email: this.data0.email.trim().toLowerCase(),
-        password: this.data0.password,        
+        password: this.data0.password,
+        avatarname1st: this.data0.avatarname1st,
+        avatarname2nd: this.data0.avatarname2nd,
+        avatarname3rd: this.data0.avatarname3rd,
+        avatarname4th: this.data0.avatarname4th,
+        avatarnameFull: this.data0.avatarnameFull,        
         avatarbgcolor: this.data0.avatarbgcolor
     }
 
@@ -35,7 +41,9 @@ User.prototype.cleanUp = function(){
 User.prototype.validate = function(){
     return new Promise(async (resolve, reject) => {
         if(this.data0.username == ""){this.errors.push("username cannot be blank :o")}
-        if(this.data0.username != "" && !validator.isAlphanumeric(this.data0.username)){this.errors.push("usernames can only contain letters and numbers")}
+        if(this.data0.username != "" && !validator.isAlphanumeric(this.data0.username)){this.errors.push("usernames can only contain letters and numbers")}       
+        if(this.data0.avatarname1st == null){this.errors.push("You need to choose a name")}
+        if(this.data0.avatarname1st == 'undefined'){this.errors.push("You need to choose a name")}            
         //the exclaimation point means if data is NOT an email
         if(!validator.isEmail(this.data0.email)){this.errors.push("sorry, you'll need a valid email address to join O_o")}
         if(this.data0.password == ""){this.errors.push("password cannot be blank :x")}
@@ -82,9 +90,9 @@ User.prototype.login = function(){
 User.prototype.register = function(){
     return new Promise(async (resolve, reject) => {
         //Step 1: validate the user entry values
-        this.cleanUp()
+        this.cleanUp()         
         await this.validate()
-        
+        this.assignAvatarName()
         //Step 2: Only if there are no validation errors
         //        then save the user data into a database
         if (!this.errors.length){
@@ -94,12 +102,332 @@ User.prototype.register = function(){
            // step 2 overwrite pass data
            this.data0.password = bcrypt.hashSync(this.data0.password, salt)
             await usersCollection.insertOne(this.data0)
+            
             this.getAvatar()
             resolve()
         } else {
             reject(this.errors)
         }    
     })
+}
+
+User.prototype.assignAvatarName = function(){
+      
+    // 1st name
+    if(this.data0.avatarname1st == "avatarname0-0"){this.data0.avatarname1st = ""}
+    if(this.data0.avatarname1st == "avatarname0-1"){this.data0.avatarname1st = "Ahkna"}
+    if(this.data0.avatarname1st == "avatarname0-2"){this.data0.avatarname1st = "Apollo"}
+    if(this.data0.avatarname1st == "avatarname0-3"){this.data0.avatarname1st = "Athena"}
+    if(this.data0.avatarname1st == "avatarname0-4"){this.data0.avatarname1st = "Ayra"}
+    if(this.data0.avatarname1st == "avatarname0-5"){this.data0.avatarname1st = "Biggles"}
+    if(this.data0.avatarname1st == "avatarname0-6"){this.data0.avatarname1st = "Bigglesworth"}
+    if(this.data0.avatarname1st == "avatarname0-7"){this.data0.avatarname1st = "Bojangles"}
+    if(this.data0.avatarname1st == "avatarname0-8"){this.data0.avatarname1st = "Buttons"}
+    if(this.data0.avatarname1st == "avatarname0-9"){this.data0.avatarname1st = "Catmahd"}
+    if(this.data0.avatarname1st == "avatarname0-10"){this.data0.avatarname1st = "Catna"}
+    if(this.data0.avatarname1st == "avatarname0-11"){this.data0.avatarname1st = "Echo"}
+    if(this.data0.avatarname1st == "avatarname0-12"){this.data0.avatarname1st = "Falkor"}
+    if(this.data0.avatarname1st == "avatarname0-13"){this.data0.avatarname1st = "Faria"}
+    if(this.data0.avatarname1st == "avatarname0-14"){this.data0.avatarname1st = "Felix"}
+    if(this.data0.avatarname1st == "avatarname0-15"){this.data0.avatarname1st = "Floof"}
+    if(this.data0.avatarname1st == "avatarname0-16"){this.data0.avatarname1st = "Floofy"}
+    if(this.data0.avatarname1st == "avatarname0-17"){this.data0.avatarname1st = "Fuzz"}
+    if(this.data0.avatarname1st == "avatarname0-18"){this.data0.avatarname1st = "Fuzzy"}
+    if(this.data0.avatarname1st == "avatarname0-19"){this.data0.avatarname1st = "Gaius"}
+    if(this.data0.avatarname1st == "avatarname0-20"){this.data0.avatarname1st = "Galactica"}
+    if(this.data0.avatarname1st == "avatarname0-21"){this.data0.avatarname1st = "Hissington"}
+    if(this.data0.avatarname1st == "avatarname0-22"){this.data0.avatarname1st = "Idris"}
+    if(this.data0.avatarname1st == "avatarname0-23"){this.data0.avatarname1st = "Invador"}
+    if(this.data0.avatarname1st == "avatarname0-24"){this.data0.avatarname1st = "Kiki"}
+    if(this.data0.avatarname1st == "avatarname0-25"){this.data0.avatarname1st = "Lil"}
+    if(this.data0.avatarname1st == "avatarname0-26"){this.data0.avatarname1st = "Luda"}
+    if(this.data0.avatarname1st == "avatarname0-27"){this.data0.avatarname1st = "Luffy"}
+    if(this.data0.avatarname1st == "avatarname0-28"){this.data0.avatarname1st = "Lulu"}
+    if(this.data0.avatarname1st == "avatarname0-29"){this.data0.avatarname1st = "Luna"}
+    if(this.data0.avatarname1st == "avatarname0-30"){this.data0.avatarname1st = "Meower"}
+    if(this.data0.avatarname1st == "avatarname0-31"){this.data0.avatarname1st = "Meowing"}
+    if(this.data0.avatarname1st == "avatarname0-32"){this.data0.avatarname1st = "Meowington"}
+    if(this.data0.avatarname1st == "avatarname0-33"){this.data0.avatarname1st = "Meowjax"}
+    if(this.data0.avatarname1st == "avatarname0-34"){this.data0.avatarname1st = "Meowsalot"}
+    if(this.data0.avatarname1st == "avatarname0-35"){this.data0.avatarname1st = "Meowsif"}
+    if(this.data0.avatarname1st == "avatarname0-36"){this.data0.avatarname1st = "Meowsly"}
+    if(this.data0.avatarname1st == "avatarname0-37"){this.data0.avatarname1st = "Merlin"}
+    if(this.data0.avatarname1st == "avatarname0-38"){this.data0.avatarname1st = "Merry"}
+    if(this.data0.avatarname1st == "avatarname0-39"){this.data0.avatarname1st = "Mewing"}
+    if(this.data0.avatarname1st == "avatarname0-40"){this.data0.avatarname1st = "Mewmers"}
+    if(this.data0.avatarname1st == "avatarname0-41"){this.data0.avatarname1st = "Mewmew"}
+    if(this.data0.avatarname1st == "avatarname0-42"){this.data0.avatarname1st = "Mewsley"}
+    if(this.data0.avatarname1st == "avatarname0-43"){this.data0.avatarname1st = "Mittens"}
+    if(this.data0.avatarname1st == "avatarname0-44"){this.data0.avatarname1st = "Nero"}
+    if(this.data0.avatarname1st == "avatarname0-45"){this.data0.avatarname1st = "Nova"}
+    if(this.data0.avatarname1st == "avatarname0-46"){this.data0.avatarname1st = "Nyla"}
+    if(this.data0.avatarname1st == "avatarname0-47"){this.data0.avatarname1st = "Nyota"}
+    if(this.data0.avatarname1st == "avatarname0-48"){this.data0.avatarname1st = "Nyoto"}
+    if(this.data0.avatarname1st == "avatarname0-49"){this.data0.avatarname1st = "Oreo"}
+    if(this.data0.avatarname1st == "avatarname0-50"){this.data0.avatarname1st = "Patches"}
+    if(this.data0.avatarname1st == "avatarname0-51"){this.data0.avatarname1st = "Pawsley"}
+    if(this.data0.avatarname1st == "avatarname0-52"){this.data0.avatarname1st = "Photon"}
+    if(this.data0.avatarname1st == "avatarname0-53"){this.data0.avatarname1st = "Pica"}
+    if(this.data0.avatarname1st == "avatarname0-54"){this.data0.avatarname1st = "Pixar"}
+    if(this.data0.avatarname1st == "avatarname0-55"){this.data0.avatarname1st = "Pixel"}
+    if(this.data0.avatarname1st == "avatarname0-56"){this.data0.avatarname1st = "Pouncer"}
+    if(this.data0.avatarname1st == "avatarname0-57"){this.data0.avatarname1st = "Prrsley"}
+    if(this.data0.avatarname1st == "avatarname0-58"){this.data0.avatarname1st = "Purring"}
+    if(this.data0.avatarname1st == "avatarname0-59"){this.data0.avatarname1st = "Quasar"}
+    if(this.data0.avatarname1st == "avatarname0-60"){this.data0.avatarname1st = "Ryzar"}
+    if(this.data0.avatarname1st == "avatarname0-61"){this.data0.avatarname1st = "Ryden"}
+    if(this.data0.avatarname1st == "avatarname0-62"){this.data0.avatarname1st = "Ryder"}
+    if(this.data0.avatarname1st == "avatarname0-63"){this.data0.avatarname1st = "Ryo"}
+    if(this.data0.avatarname1st == "avatarname0-64"){this.data0.avatarname1st = "Salem"}
+    if(this.data0.avatarname1st == "avatarname0-65"){this.data0.avatarname1st = "Scratcherson"}
+    if(this.data0.avatarname1st == "avatarname0-66"){this.data0.avatarname1st = "Scratches"}
+    if(this.data0.avatarname1st == "avatarname0-67"){this.data0.avatarname1st = "Scratchington"}
+    if(this.data0.avatarname1st == "avatarname0-68"){this.data0.avatarname1st = "Scratchy"}
+    if(this.data0.avatarname1st == "avatarname0-69"){this.data0.avatarname1st = "Shadow"}
+    if(this.data0.avatarname1st == "avatarname0-70"){this.data0.avatarname1st = "Squancherly"}
+    if(this.data0.avatarname1st == "avatarname0-71"){this.data0.avatarname1st = "Squanchington"}
+    if(this.data0.avatarname1st == "avatarname0-72"){this.data0.avatarname1st = "Squanchy"}
+    if(this.data0.avatarname1st == "avatarname0-73"){this.data0.avatarname1st = "Stella"}
+    if(this.data0.avatarname1st == "avatarname0-74"){this.data0.avatarname1st = "Trillion"}
+    if(this.data0.avatarname1st == "avatarname0-75"){this.data0.avatarname1st = "Trilon"}
+    if(this.data0.avatarname1st == "avatarname0-76"){this.data0.avatarname1st = "Tux"}
+    if(this.data0.avatarname1st == "avatarname0-77"){this.data0.avatarname1st = "Voltron"}
+    if(this.data0.avatarname1st == "avatarname0-78"){this.data0.avatarname1st = "Voxel"}
+    if(this.data0.avatarname1st == "avatarname0-79"){this.data0.avatarname1st = "Voxen"}
+    if(this.data0.avatarname1st == "avatarname0-80"){this.data0.avatarname1st = "Vrillion"}
+    if(this.data0.avatarname1st == "avatarname0-81"){this.data0.avatarname1st = "Vyrtex"}
+    if(this.data0.avatarname1st == "avatarname0-82"){this.data0.avatarname1st = "Xanxia"}
+    if(this.data0.avatarname1st == "avatarname0-83"){this.data0.avatarname1st = "Xavier"}
+    if(this.data0.avatarname1st == "avatarname0-84"){this.data0.avatarname1st = "Xerxes"}
+    if(this.data0.avatarname1st == "avatarname0-85"){this.data0.avatarname1st = "Xyla"}
+    if(this.data0.avatarname1st == "avatarname0-86"){this.data0.avatarname1st = "Xynar"}
+    if(this.data0.avatarname1st == "avatarname0-87"){this.data0.avatarname1st = "Zareen"}
+    if(this.data0.avatarname1st == "avatarname0-88"){this.data0.avatarname1st = "Zarina"}
+    if(this.data0.avatarname1st == "avatarname0-89"){this.data0.avatarname1st = "Zero"}
+    if(this.data0.avatarname1st == "avatarname0-90"){this.data0.avatarname1st = "Zora"}
+    if(this.data0.avatarname1st == "avatarname0-91"){this.data0.avatarname1st = "Zoran"}
+
+    // 2nd Name
+    if(this.data0.avatarname2nd == null){this.data0.avatarname2nd = ""}
+    if(this.data0.avatarname2nd == undefined){this.data0.avatarname2nd = ""}
+    if(this.data0.avatarname2nd == "avatarname0-starter"){this.data0.avatarname2nd = ""}
+    if(this.data0.avatarname2nd == "avatarname0-0"){this.data0.avatarname2nd = ""}
+    if(this.data0.avatarname2nd == "avatarname0-1"){this.data0.avatarname2nd = "Ahkna"}
+    if(this.data0.avatarname2nd == "avatarname0-2"){this.data0.avatarname2nd = "Apollo"}
+    if(this.data0.avatarname2nd == "avatarname0-3"){this.data0.avatarname2nd = "Athena"}
+    if(this.data0.avatarname2nd == "avatarname0-4"){this.data0.avatarname2nd = "Ayra"}
+    if(this.data0.avatarname2nd == "avatarname0-5"){this.data0.avatarname2nd = "Biggles"}
+    if(this.data0.avatarname2nd == "avatarname0-6"){this.data0.avatarname2nd = "Bigglesworth"}
+    if(this.data0.avatarname2nd == "avatarname0-7"){this.data0.avatarname2nd = "Bojangles"}
+    if(this.data0.avatarname2nd == "avatarname0-8"){this.data0.avatarname2nd = "Buttons"}
+    if(this.data0.avatarname2nd == "avatarname0-9"){this.data0.avatarname2nd = "Catmahd"}
+    if(this.data0.avatarname2nd == "avatarname0-10"){this.data0.avatarname2nd = "Catna"}
+    if(this.data0.avatarname2nd == "avatarname0-11"){this.data0.avatarname2nd = "Echo"}
+    if(this.data0.avatarname2nd == "avatarname0-12"){this.data0.avatarname2nd = "Falkor"}
+    if(this.data0.avatarname2nd == "avatarname0-13"){this.data0.avatarname2nd = "Faria"}
+    if(this.data0.avatarname2nd == "avatarname0-14"){this.data0.avatarname2nd = "Felix"}
+    if(this.data0.avatarname2nd == "avatarname0-15"){this.data0.avatarname2nd = "Floof"}
+    if(this.data0.avatarname2nd == "avatarname0-16"){this.data0.avatarname2nd = "Floofy"}
+    if(this.data0.avatarname2nd == "avatarname0-17"){this.data0.avatarname2nd = "Fuzz"}
+    if(this.data0.avatarname2nd == "avatarname0-18"){this.data0.avatarname2nd = "Fuzzy"}
+    if(this.data0.avatarname2nd == "avatarname0-19"){this.data0.avatarname2nd = "Gaius"}
+    if(this.data0.avatarname2nd == "avatarname0-20"){this.data0.avatarname2nd = "Galactica"}
+    if(this.data0.avatarname2nd == "avatarname0-21"){this.data0.avatarname2nd = "Hissington"}
+    if(this.data0.avatarname2nd == "avatarname0-22"){this.data0.avatarname2nd = "Idris"}
+    if(this.data0.avatarname2nd == "avatarname0-23"){this.data0.avatarname2nd = "Invador"}
+    if(this.data0.avatarname2nd == "avatarname0-24"){this.data0.avatarname2nd = "Kiki"}
+    if(this.data0.avatarname2nd == "avatarname0-25"){this.data0.avatarname2nd = "Lil"}
+    if(this.data0.avatarname2nd == "avatarname0-26"){this.data0.avatarname2nd = "Luda"}
+    if(this.data0.avatarname2nd == "avatarname0-27"){this.data0.avatarname2nd = "Luffy"}
+    if(this.data0.avatarname2nd == "avatarname0-28"){this.data0.avatarname2nd = "Lulu"}
+    if(this.data0.avatarname2nd == "avatarname0-29"){this.data0.avatarname2nd = "Luna"}
+    if(this.data0.avatarname2nd == "avatarname0-30"){this.data0.avatarname2nd = "Meower"}
+    if(this.data0.avatarname2nd == "avatarname0-31"){this.data0.avatarname2nd = "Meowing"}
+    if(this.data0.avatarname2nd == "avatarname0-32"){this.data0.avatarname2nd = "Meowington"}
+    if(this.data0.avatarname2nd == "avatarname0-33"){this.data0.avatarname2nd = "Meowjax"}
+    if(this.data0.avatarname2nd == "avatarname0-34"){this.data0.avatarname2nd = "Meowsalot"}
+    if(this.data0.avatarname2nd == "avatarname0-35"){this.data0.avatarname2nd = "Meowsif"}
+    if(this.data0.avatarname2nd == "avatarname0-36"){this.data0.avatarname2nd = "Meowsly"}
+    if(this.data0.avatarname2nd == "avatarname0-37"){this.data0.avatarname2nd = "Merlin"}
+    if(this.data0.avatarname2nd == "avatarname0-38"){this.data0.avatarname2nd = "Merry"}
+    if(this.data0.avatarname2nd == "avatarname0-39"){this.data0.avatarname2nd = "Mewing"}
+    if(this.data0.avatarname2nd == "avatarname0-40"){this.data0.avatarname2nd = "Mewmers"}
+    if(this.data0.avatarname2nd == "avatarname0-41"){this.data0.avatarname2nd = "Mewmew"}
+    if(this.data0.avatarname2nd == "avatarname0-42"){this.data0.avatarname2nd = "Mewsley"}
+    if(this.data0.avatarname2nd == "avatarname0-43"){this.data0.avatarname2nd = "Mittens"}
+    if(this.data0.avatarname2nd == "avatarname0-44"){this.data0.avatarname2nd = "Nero"}
+    if(this.data0.avatarname2nd == "avatarname0-45"){this.data0.avatarname2nd = "Nova"}
+    if(this.data0.avatarname2nd == "avatarname0-46"){this.data0.avatarname2nd = "Nyla"}
+    if(this.data0.avatarname2nd == "avatarname0-47"){this.data0.avatarname2nd = "Nyota"}
+    if(this.data0.avatarname2nd == "avatarname0-48"){this.data0.avatarname2nd = "Nyoto"}
+    if(this.data0.avatarname2nd == "avatarname0-49"){this.data0.avatarname2nd = "Oreo"}
+    if(this.data0.avatarname2nd == "avatarname0-50"){this.data0.avatarname2nd = "Patches"}
+    if(this.data0.avatarname2nd == "avatarname0-51"){this.data0.avatarname2nd = "Pawsley"}
+    if(this.data0.avatarname2nd == "avatarname0-52"){this.data0.avatarname2nd = "Photon"}
+    if(this.data0.avatarname2nd == "avatarname0-53"){this.data0.avatarname2nd = "Pica"}
+    if(this.data0.avatarname2nd == "avatarname0-54"){this.data0.avatarname2nd = "Pixar"}
+    if(this.data0.avatarname2nd == "avatarname0-55"){this.data0.avatarname2nd = "Pixel"}
+    if(this.data0.avatarname2nd == "avatarname0-56"){this.data0.avatarname2nd = "Pouncer"}
+    if(this.data0.avatarname2nd == "avatarname0-57"){this.data0.avatarname2nd = "Prrsley"}
+    if(this.data0.avatarname2nd == "avatarname0-58"){this.data0.avatarname2nd = "Purring"}
+    if(this.data0.avatarname2nd == "avatarname0-59"){this.data0.avatarname2nd = "Quasar"}
+    if(this.data0.avatarname2nd == "avatarname0-60"){this.data0.avatarname2nd = "Ryzar"}
+    if(this.data0.avatarname2nd == "avatarname0-61"){this.data0.avatarname2nd = "Ryden"}
+    if(this.data0.avatarname2nd == "avatarname0-62"){this.data0.avatarname2nd = "Ryder"}
+    if(this.data0.avatarname2nd == "avatarname0-63"){this.data0.avatarname2nd = "Ryo"}
+    if(this.data0.avatarname2nd == "avatarname0-64"){this.data0.avatarname2nd = "Salem"}
+    if(this.data0.avatarname2nd == "avatarname0-65"){this.data0.avatarname2nd = "Scratcherson"}
+    if(this.data0.avatarname2nd == "avatarname0-66"){this.data0.avatarname2nd = "Scratches"}
+    if(this.data0.avatarname2nd == "avatarname0-67"){this.data0.avatarname2nd = "Scratchington"}
+    if(this.data0.avatarname2nd == "avatarname0-68"){this.data0.avatarname2nd = "Scratchy"}
+    if(this.data0.avatarname2nd == "avatarname0-69"){this.data0.avatarname2nd = "Shadow"}
+    if(this.data0.avatarname2nd == "avatarname0-70"){this.data0.avatarname2nd = "Squancherly"}
+    if(this.data0.avatarname2nd == "avatarname0-71"){this.data0.avatarname2nd = "Squanchington"}
+    if(this.data0.avatarname2nd == "avatarname0-72"){this.data0.avatarname2nd = "Squanchy"}
+    if(this.data0.avatarname2nd == "avatarname0-73"){this.data0.avatarname2nd = "Stella"}
+    if(this.data0.avatarname2nd == "avatarname0-74"){this.data0.avatarname2nd = "Trillion"}
+    if(this.data0.avatarname2nd == "avatarname0-75"){this.data0.avatarname2nd = "Trilon"}
+    if(this.data0.avatarname2nd == "avatarname0-76"){this.data0.avatarname2nd = "Tux"}
+    if(this.data0.avatarname2nd == "avatarname0-77"){this.data0.avatarname2nd = "Voltron"}
+    if(this.data0.avatarname2nd == "avatarname0-78"){this.data0.avatarname2nd = "Voxel"}
+    if(this.data0.avatarname2nd == "avatarname0-79"){this.data0.avatarname2nd = "Voxen"}
+    if(this.data0.avatarname2nd == "avatarname0-80"){this.data0.avatarname2nd = "Vrillion"}
+    if(this.data0.avatarname2nd == "avatarname0-81"){this.data0.avatarname2nd = "Vyrtex"}
+    if(this.data0.avatarname2nd == "avatarname0-82"){this.data0.avatarname2nd = "Xanxia"}
+    if(this.data0.avatarname2nd == "avatarname0-83"){this.data0.avatarname2nd = "Xavier"}
+    if(this.data0.avatarname2nd == "avatarname0-84"){this.data0.avatarname2nd = "Xerxes"}
+    if(this.data0.avatarname2nd == "avatarname0-85"){this.data0.avatarname2nd = "Xyla"}
+    if(this.data0.avatarname2nd == "avatarname0-86"){this.data0.avatarname2nd = "Xynar"}
+    if(this.data0.avatarname2nd == "avatarname0-87"){this.data0.avatarname2nd = "Zareen"}
+    if(this.data0.avatarname2nd == "avatarname0-88"){this.data0.avatarname2nd = "Zarina"}
+    if(this.data0.avatarname2nd == "avatarname0-89"){this.data0.avatarname2nd = "Zero"}
+    if(this.data0.avatarname2nd == "avatarname0-90"){this.data0.avatarname2nd = "Zora"}
+    if(this.data0.avatarname2nd == "avatarname0-91"){this.data0.avatarname2nd = "Zoran"}
+
+    //3rd Name
+    if(this.data0.avatarname3rd == null){this.data0.avatarname3rd = ""}
+    if(this.data0.avatarname3rd == undefined){this.data0.avatarname3rd = ""}
+    if(this.data0.avatarname3rd == "avatarname0-0"){this.data0.avatarname3rd = ""}
+    if(this.data0.avatarname3rd == "avatarname0-1"){this.data0.avatarname3rd = "Ahkna"}
+    if(this.data0.avatarname3rd == "avatarname0-2"){this.data0.avatarname3rd = "Apollo"}
+    if(this.data0.avatarname3rd == "avatarname0-3"){this.data0.avatarname3rd = "Athena"}
+    if(this.data0.avatarname3rd == "avatarname0-4"){this.data0.avatarname3rd = "Ayra"}
+    if(this.data0.avatarname3rd == "avatarname0-5"){this.data0.avatarname3rd = "Biggles"}
+    if(this.data0.avatarname3rd == "avatarname0-6"){this.data0.avatarname3rd = "Bigglesworth"}
+    if(this.data0.avatarname3rd == "avatarname0-7"){this.data0.avatarname3rd = "Bojangles"}
+    if(this.data0.avatarname3rd == "avatarname0-8"){this.data0.avatarname3rd = "Buttons"}
+    if(this.data0.avatarname3rd == "avatarname0-9"){this.data0.avatarname3rd = "Catmahd"}
+    if(this.data0.avatarname3rd == "avatarname0-10"){this.data0.avatarname3rd = "Catna"}
+    if(this.data0.avatarname3rd == "avatarname0-11"){this.data0.avatarname3rd = "Echo"}
+    if(this.data0.avatarname3rd == "avatarname0-12"){this.data0.avatarname3rd = "Falkor"}
+    if(this.data0.avatarname3rd == "avatarname0-13"){this.data0.avatarname3rd = "Faria"}
+    if(this.data0.avatarname3rd == "avatarname0-14"){this.data0.avatarname3rd = "Felix"}
+    if(this.data0.avatarname3rd == "avatarname0-15"){this.data0.avatarname3rd = "Floof"}
+    if(this.data0.avatarname3rd == "avatarname0-16"){this.data0.avatarname3rd = "Floofy"}
+    if(this.data0.avatarname3rd == "avatarname0-17"){this.data0.avatarname3rd = "Fuzz"}
+    if(this.data0.avatarname3rd == "avatarname0-18"){this.data0.avatarname3rd = "Fuzzy"}
+    if(this.data0.avatarname3rd == "avatarname0-19"){this.data0.avatarname3rd = "Gaius"}
+    if(this.data0.avatarname3rd == "avatarname0-20"){this.data0.avatarname3rd = "Galactica"}
+    if(this.data0.avatarname3rd == "avatarname0-21"){this.data0.avatarname3rd = "Hissington"}
+    if(this.data0.avatarname3rd == "avatarname0-22"){this.data0.avatarname3rd = "Idris"}
+    if(this.data0.avatarname3rd == "avatarname0-23"){this.data0.avatarname3rd = "Invador"}
+    if(this.data0.avatarname3rd == "avatarname0-24"){this.data0.avatarname3rd = "Kiki"}
+    if(this.data0.avatarname3rd == "avatarname0-25"){this.data0.avatarname3rd = "Lil"}
+    if(this.data0.avatarname3rd == "avatarname0-26"){this.data0.avatarname3rd = "Luda"}
+    if(this.data0.avatarname3rd == "avatarname0-27"){this.data0.avatarname3rd = "Luffy"}
+    if(this.data0.avatarname3rd == "avatarname0-28"){this.data0.avatarname3rd = "Lulu"}
+    if(this.data0.avatarname3rd == "avatarname0-29"){this.data0.avatarname3rd = "Luna"}
+    if(this.data0.avatarname3rd == "avatarname0-30"){this.data0.avatarname3rd = "Meower"}
+    if(this.data0.avatarname3rd == "avatarname0-31"){this.data0.avatarname3rd = "Meowing"}
+    if(this.data0.avatarname3rd == "avatarname0-32"){this.data0.avatarname3rd = "Meowington"}
+    if(this.data0.avatarname3rd == "avatarname0-33"){this.data0.avatarname3rd = "Meowjax"}
+    if(this.data0.avatarname3rd == "avatarname0-34"){this.data0.avatarname3rd = "Meowsalot"}
+    if(this.data0.avatarname3rd == "avatarname0-35"){this.data0.avatarname3rd = "Meowsif"}
+    if(this.data0.avatarname3rd == "avatarname0-36"){this.data0.avatarname3rd = "Meowsly"}
+    if(this.data0.avatarname3rd == "avatarname0-37"){this.data0.avatarname3rd = "Merlin"}
+    if(this.data0.avatarname3rd == "avatarname0-38"){this.data0.avatarname3rd = "Merry"}
+    if(this.data0.avatarname3rd == "avatarname0-39"){this.data0.avatarname3rd = "Mewing"}
+    if(this.data0.avatarname3rd == "avatarname0-40"){this.data0.avatarname3rd = "Mewmers"}
+    if(this.data0.avatarname3rd == "avatarname0-41"){this.data0.avatarname3rd = "Mewmew"}
+    if(this.data0.avatarname3rd == "avatarname0-42"){this.data0.avatarname3rd = "Mewsley"}
+    if(this.data0.avatarname3rd == "avatarname0-43"){this.data0.avatarname3rd = "Mittens"}
+    if(this.data0.avatarname3rd == "avatarname0-44"){this.data0.avatarname3rd = "Nero"}
+    if(this.data0.avatarname3rd == "avatarname0-45"){this.data0.avatarname3rd = "Nova"}
+    if(this.data0.avatarname3rd == "avatarname0-46"){this.data0.avatarname3rd = "Nyla"}
+    if(this.data0.avatarname3rd == "avatarname0-47"){this.data0.avatarname3rd = "Nyota"}
+    if(this.data0.avatarname3rd == "avatarname0-48"){this.data0.avatarname3rd = "Nyoto"}
+    if(this.data0.avatarname3rd == "avatarname0-49"){this.data0.avatarname3rd = "Oreo"}
+    if(this.data0.avatarname3rd == "avatarname0-50"){this.data0.avatarname3rd = "Patches"}
+    if(this.data0.avatarname3rd == "avatarname0-51"){this.data0.avatarname3rd = "Pawsley"}
+    if(this.data0.avatarname3rd == "avatarname0-52"){this.data0.avatarname3rd = "Photon"}
+    if(this.data0.avatarname3rd == "avatarname0-53"){this.data0.avatarname3rd = "Pica"}
+    if(this.data0.avatarname3rd == "avatarname0-54"){this.data0.avatarname3rd = "Pixar"}
+    if(this.data0.avatarname3rd == "avatarname0-55"){this.data0.avatarname3rd = "Pixel"}
+    if(this.data0.avatarname3rd == "avatarname0-56"){this.data0.avatarname3rd = "Pouncer"}
+    if(this.data0.avatarname3rd == "avatarname0-57"){this.data0.avatarname3rd = "Prrsley"}
+    if(this.data0.avatarname3rd == "avatarname0-58"){this.data0.avatarname3rd = "Purring"}
+    if(this.data0.avatarname3rd == "avatarname0-59"){this.data0.avatarname3rd = "Quasar"}
+    if(this.data0.avatarname3rd == "avatarname0-60"){this.data0.avatarname3rd = "Ryzar"}
+    if(this.data0.avatarname3rd == "avatarname0-61"){this.data0.avatarname3rd = "Ryden"}
+    if(this.data0.avatarname3rd == "avatarname0-62"){this.data0.avatarname3rd = "Ryder"}
+    if(this.data0.avatarname3rd == "avatarname0-63"){this.data0.avatarname3rd = "Ryo"}
+    if(this.data0.avatarname3rd == "avatarname0-64"){this.data0.avatarname3rd = "Salem"}
+    if(this.data0.avatarname3rd == "avatarname0-65"){this.data0.avatarname3rd = "Scratcherson"}
+    if(this.data0.avatarname3rd == "avatarname0-66"){this.data0.avatarname3rd = "Scratches"}
+    if(this.data0.avatarname3rd == "avatarname0-67"){this.data0.avatarname3rd = "Scratchington"}
+    if(this.data0.avatarname3rd == "avatarname0-68"){this.data0.avatarname3rd = "Scratchy"}
+    if(this.data0.avatarname3rd == "avatarname0-69"){this.data0.avatarname3rd = "Shadow"}
+    if(this.data0.avatarname3rd == "avatarname0-70"){this.data0.avatarname3rd = "Squancherly"}
+    if(this.data0.avatarname3rd == "avatarname0-71"){this.data0.avatarname3rd = "Squanchington"}
+    if(this.data0.avatarname3rd == "avatarname0-72"){this.data0.avatarname3rd = "Squanchy"}
+    if(this.data0.avatarname3rd == "avatarname0-73"){this.data0.avatarname3rd = "Stella"}
+    if(this.data0.avatarname3rd == "avatarname0-74"){this.data0.avatarname3rd = "Trillion"}
+    if(this.data0.avatarname3rd == "avatarname0-75"){this.data0.avatarname3rd = "Trilon"}
+    if(this.data0.avatarname3rd == "avatarname0-76"){this.data0.avatarname3rd = "Tux"}
+    if(this.data0.avatarname3rd == "avatarname0-77"){this.data0.avatarname3rd = "Voltron"}
+    if(this.data0.avatarname3rd == "avatarname0-78"){this.data0.avatarname3rd = "Voxel"}
+    if(this.data0.avatarname3rd == "avatarname0-79"){this.data0.avatarname3rd = "Voxen"}
+    if(this.data0.avatarname3rd == "avatarname0-80"){this.data0.avatarname3rd = "Vrillion"}
+    if(this.data0.avatarname3rd == "avatarname0-81"){this.data0.avatarname3rd = "Vyrtex"}
+    if(this.data0.avatarname3rd == "avatarname0-82"){this.data0.avatarname3rd = "Xanxia"}
+    if(this.data0.avatarname3rd == "avatarname0-83"){this.data0.avatarname3rd = "Xavier"}
+    if(this.data0.avatarname3rd == "avatarname0-84"){this.data0.avatarname3rd = "Xerxes"}
+    if(this.data0.avatarname3rd == "avatarname0-85"){this.data0.avatarname3rd = "Xyla"}
+    if(this.data0.avatarname3rd == "avatarname0-86"){this.data0.avatarname3rd = "Xynar"}
+    if(this.data0.avatarname3rd == "avatarname0-87"){this.data0.avatarname3rd = "Zareen"}
+    if(this.data0.avatarname3rd == "avatarname0-88"){this.data0.avatarname3rd = "Zarina"}
+    if(this.data0.avatarname3rd == "avatarname0-89"){this.data0.avatarname3rd = "Zero"}
+    if(this.data0.avatarname3rd == "avatarname0-90"){this.data0.avatarname3rd = "Zora"}
+    if(this.data0.avatarname3rd == "avatarname0-91"){this.data0.avatarname3rd = "Zoran"}
+
+    //4th Name
+    if(this.data0.avatarname4th == null){this.data0.avatarname4th = ""}
+    if(this.data0.avatarname4th == undefined){this.data0.avatarname4th = ""}
+    if(this.data0.avatarname4th == "avatarname0-0"){this.data0.avatarname4th = ""}
+    if(this.data0.avatarname4th == "avatarname0-1"){this.data0.avatarname4th = "I"}
+    if(this.data0.avatarname4th == "avatarname0-2"){this.data0.avatarname4th = "II"}
+    if(this.data0.avatarname4th == "avatarname0-3"){this.data0.avatarname4th = "III"}
+    if(this.data0.avatarname4th == "avatarname0-4"){this.data0.avatarname4th = "IV"}
+    if(this.data0.avatarname4th == "avatarname0-5"){this.data0.avatarname4th = "V"}
+    if(this.data0.avatarname4th == "avatarname0-6"){this.data0.avatarname4th = "VI"}
+    if(this.data0.avatarname4th == "avatarname0-7"){this.data0.avatarname4th = "VII"}
+    if(this.data0.avatarname4th == "avatarname0-8"){this.data0.avatarname4th = "VIII"}
+    if(this.data0.avatarname4th == "avatarname0-9"){this.data0.avatarname4th = "IX"}
+    if(this.data0.avatarname4th == "avatarname0-10"){this.data0.avatarname4th = "X"}
+    if(this.data0.avatarname4th == "avatarname0-11"){this.data0.avatarname4th = "XI"}
+    if(this.data0.avatarname4th == "avatarname0-12"){this.data0.avatarname4th = "XII"}
+    if(this.data0.avatarname4th == "avatarname0-13"){this.data0.avatarname4th = "XIII"}
+    if(this.data0.avatarname4th == "avatarname0-14"){this.data0.avatarname4th = "XIV"}
+    if(this.data0.avatarname4th == "avatarname0-15"){this.data0.avatarname4th = "XV"}
+    if(this.data0.avatarname4th == "avatarname0-16"){this.data0.avatarname4th = "XVI"}
+    if(this.data0.avatarname4th == "avatarname0-17"){this.data0.avatarname4th = "XVII"}
+    if(this.data0.avatarname4th == "avatarname0-18"){this.data0.avatarname4th = "XVIII"}
+    if(this.data0.avatarname4th == "avatarname0-19"){this.data0.avatarname4th = "XIX"}
+    if(this.data0.avatarname4th == "avatarname0-20"){this.data0.avatarname4th = "XX"}
+    if(this.data0.avatarname4th == "avatarname0-21"){this.data0.avatarname4th = "XXI"}
+    if(this.data0.avatarname4th == "avatarname0-22"){this.data0.avatarname4th = "XXII"}
+
+    this.data0.avatarnameFull = this.data0.avatarname1st + " " + this.data0.avatarname2nd + " " + this.data0.avatarname3rd + " " + this.data0.avatarname4th
 }
 
 User.prototype.getAvatar = function() {
@@ -120,6 +448,7 @@ User.findByUsername = function(username){
                 userDoc = {
                     _id: userDoc.data0._id,
                     username: userDoc.data0.username,
+                    avatarnameFull: userDoc.data0.avatarnameFull,
                     avatar: userDoc.avatar,
                     avatarbgcolor: userDoc.data0.avatarbgcolor
 

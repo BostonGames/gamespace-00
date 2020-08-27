@@ -6,6 +6,7 @@ export default class RegistrationForm {
         this.form = document.querySelector("#registration-form")
         // quearySelectorAll will return multiple elements like in the css doc
         this.allFields = document.querySelectorAll("#registration-form .form-control")
+        //this.allFields = document.querySelectorAll("#meowmers0 .form-control")
         this.insertValidationElements()
         this.username = document.querySelector("#username-register")
         this.username.previousValue = ""
@@ -97,7 +98,7 @@ export default class RegistrationForm {
         // check if user entry is either blank or contains non-alpha numeric symbols
         // this uses a regular expression for js
         if(this.username.value != "" && !/^([a-zA-Z0-9]+)$/.test(this.username.value)) {
-            this.showValidationError(this.username, "you can only use letters and numbers in your username")
+            this.showValidationError(this.meowmers, "you can only use letters and numbers in your username")
         }
         if(this.username.value.length > 30){
             this.showValidationError(this.username, "your username can't be that long")

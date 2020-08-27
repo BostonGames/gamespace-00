@@ -12,7 +12,7 @@ exports.create = function(req, res){
 
         sendgrid.send({
             to: 'allyn89@gmail.com',
-            from: 'meowmers@test.com',
+            from: 'meowmers@bostongames.net',
             subject: 'a new user has registered',
             text: 'a new alien cat has joined Game Space',
             // can use ``s to put in dynamic html
