@@ -6,14 +6,14 @@
     <%- include('includes/flash') %>
 
     <div class="text-center" style="color:#6e6e6e">
-      <div class="box-container-1"><h2>Welcome to your galaxy, <strong><%= user.avatarnameFull %></strong></h2></div>
+      <div class="text-0 box-container-1"><h2>Welcome to your galaxy, <strong><%= user.avatarnameFull %></strong></h2></div>
       <br><br><br>
     </div> 
 
     <% if (posts.length) { %>
       <div class="box-container-0">
 
-      <h3 class="postboard-header-text text-center mb-4">Latest meowings from those in your Galaxy:</h3>
+      <h3 class="text-0 postboard-header-text text-center mb-4">Galaxy member feed:</h3>
       <div class="list-group">
         <% posts.forEach(function(post){ %>
         <a href="/post/<%= post._id %>" class="list-group-item list-group-item-action">
@@ -34,7 +34,7 @@
       <div class="screenContentContainer0"> 
         
 
-        <div class="mainSpeechBubble sb2">You can find other alien cats in the universe in the CatChat<i class="fas fa-comment"></i> </span></div>          
+        <div class="text-0 mainSpeechBubble sb2">You can find other alien cats in the universe by using the CatChat <i class="fas fa-comment"></i> </span></div>          
       
       <div class="meowmersWrapper">
     <div style="flex-basis:200px" class="meowmers"> </div>

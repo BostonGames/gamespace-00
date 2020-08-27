@@ -119,6 +119,27 @@ p {
   overflow: hidden;
 }
 
+.text-0{
+  font-family: 'Architects Daughter', 'Roboto';
+  font-size: 18px;
+}
+
+/*form labels*/
+.text-1{
+  font-family: 'Architects Daughter', 'Roboto';
+  color: rgba(212, 212, 212, 0.89);
+  font-size: 15px;
+}
+
+/*profile Avatar name*/
+.text-2{
+  font-family: 'Roboto';
+  font-size: 23px;
+  font-weight: bold;
+  text-transform: uppercase;
+  vertical-align: bottom;
+}
+
 .postboard-header-text{
   color: rgb(231, 231, 231);
 }
@@ -129,9 +150,9 @@ p {
 }
 /*Profile Name text*/
 h2{
-  font-family: 'Montserrat','Roboto', Sans Serif!important;
+  /*font-family: 'Montserrat','Roboto', Sans Serif!important;*/
   
-  font-size: 25px;
+  font-size: 20px;
 
 
   color:#8c00ff;
@@ -364,7 +385,7 @@ width: 7%;
   
 }
 
-/*old way kinda sucks the triangle moves all over the place*/
+
 .mainSpeechBubble{
   position:relative;
   background-color:  var(SpeechBubbleMain);

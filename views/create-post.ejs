@@ -4,15 +4,16 @@
 <div class="container container--narrow align-items-center p-2"><div><%- include('includes/flash') %></div></div>  
 
 <div class="box-container-2 container py-md-5 container--narrow">
+  
 
   <form action="/create-post" method="POST">
     <div class="form-group">
-      <label for="post-title" class="mb-1"><small>Title</small></label>
+      <label for="post-title" class="text-1 mb-1">Title</label>
       <input required name="title" id="post-title" class="form-control form-control-lg form-control-title" type="text" placeholder="" autocomplete="off">
     </div>
 
     <div class="form-group">
-      <label for="post-body" class="mb-1"><small>Body Content</small></label>
+      <label for="post-body" class="text-1 mb-1">Body Content</label>
       <textarea required name="body" id="post-body" class="body-content tall-textarea form-control" type="text"></textarea>
     </div>
 

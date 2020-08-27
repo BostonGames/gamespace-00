@@ -1,6 +1,6 @@
 
 
-<h2><img class="avatar-profile" style="background-color: <%= String(profileAvatarBGcolor) %>;" src="<%= profileAvatar %>"> <%= profileAvatarname %>  
+<h2><img class="avatar-profile" style="background-color: <%= String(profileAvatarBGcolor) %>;" src="<%= profileAvatar %>"><span class="text-2"><%= profileAvatarname %> </span>  
     
   
   <% if (user && !isVisitorsProfile) {
@@ -8,12 +8,12 @@
       if(isFollowing){ %>
         <form class="ml-2 d-inline" action="/removeFollow/<%= profileUsername %>" method="POST">
          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-         <button class="btn btn-danger btn-sm">Remove from my Galaxy &nbsp; <i class="fas fa-user-times"></i></button>
+         <button class="align-bottom btn btn-danger btn-sm">Remove from my Galaxy &nbsp; <i class="fas fa-user-times"></i></button>
         </form>
         <% } else { %>
         <form class="ml-2 d-inline" action="/addFollow/<%= profileUsername %>" method="POST">
           <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-          <button class="btn btn-primary btn-sm">Add to my Galaxy &nbsp; <i class="fas fa-user-plus"></i></button> 
+          <button class="align-bottom btn btn-primary btn-sm">Add to my Galaxy &nbsp; <i class="fas fa-user-plus"></i></button> 
         </form>
     <% }
     } %>
@@ -22,7 +22,7 @@
   </h2>
 
   <div class="profile-nav nav nav-tabs pt-2 mb-4">
-    <a href="/profile/<%= profileUsername %>" class="profile-nav-link nav-item nav-link <%= currentPage == 'posts' ? 'active' : '' %>">Posts: <%= counts.postCount %></a>
-    <a href="/profile/<%= profileUsername %>/followers" class="profile-nav-link nav-item nav-link <%= currentPage == 'followers' ? 'active' : '' %>">Followers: <%= counts.followerCount %></a>
-    <a href="/profile/<%= profileUsername %>/following" class="profile-nav-link nav-item nav-link <%= currentPage == 'following' ? 'active' : '' %>">Following: <%= counts.followingCount %></a>
+    <a href="/profile/<%= profileUsername %>" class="text-0 profile-nav-link nav-item nav-link <%= currentPage == 'posts' ? 'active' : '' %>">Posts: <%= counts.postCount %></a>
+    <a href="/profile/<%= profileUsername %>/followers" class="text-0 profile-nav-link nav-item nav-link <%= currentPage == 'followers' ? 'active' : '' %>">Followers: <%= counts.followerCount %></a>
+    <a href="/profile/<%= profileUsername %>/following" class="text-0 profile-nav-link nav-item nav-link <%= currentPage == 'following' ? 'active' : '' %>">Galaxy Members: <%= counts.followingCount %></a>
   </div>
