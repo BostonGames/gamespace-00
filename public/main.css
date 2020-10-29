@@ -54,7 +54,7 @@ footer: 10000
 }
 
 .row0:before,
-.row:after {
+.row0:after {
   content: "";
   display: table;
 }
@@ -230,9 +230,9 @@ footer a:visited {
 }
 
 .row0 {
-  border-color: red;
+  /*border-color: red;
   border-width: 1px;
-  border-style: dashed;
+  border-style: dashed;*/
   width: 100%;
 }
 .dropdownText0 {
