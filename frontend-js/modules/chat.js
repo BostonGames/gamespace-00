@@ -1,123 +1,152 @@
-import DOMPurify from 'dompurify'
+import DOMPurify from "dompurify"
 
-export default class Chat{
-    constructor(){
-        this.openedYet = false
-        this.chatWrapper = document.querySelector("#chat-wrapper")
-        this.openIcon = document.querySelector(".header-chat-icon")
-        
-        this.injectHTML()
-        this.chatLog = document.querySelector("#chat")
-        //find the chat text form and use the stuff ppl type in
-        this.chatField = document.querySelector("#chatField")
-        this.chatPunctuation = document.querySelector("#chatPunctuation")
-        this.chatTextColor = document.querySelector("#chatTextColor")
-        this.chatForm = document.querySelector("#chatForm")
-        //need this below injectHTML, since it wont exist until the chat icon is clicked on
-        this.closeIcon = document.querySelector(".chat-title-bar-close")
-        this.events()
-    }
+export default class Chat {
+  constructor() {
+    this.openedYet = false
+    this.chatWrapper = document.querySelector("#chat-wrapper")
+    this.openIcon = document.querySelector(".header-chat-icon")
 
-    // Events
-    events() {
-        this.chatForm.addEventListener('submit', (e) => {            
-            console.log("submit heard")
-            console.log(this.chatTextColor.value)
-            // prevent page from reloading
-            e.preventDefault()
-            this.sendMessageToServer()
-        })  
-        this.chatForm.addEventListener("keydown", (e) => {
-            if (e.keyCode === 13) {
-                // prevent page from reloading
-                e.preventDefault()
-                this.sendMessageToServer()
-            }
-        });      
-        this.openIcon.addEventListener("click", () => this.showChat())
-        this.closeIcon.addEventListener("click", () => this.hideChat())
-    }
+    this.injectHTML()
+    this.chatLog = document.querySelector("#chat")
+    //find the chat text form and use the stuff ppl type in
+    this.chatField = document.querySelector("#chatField")
+    this.chatPunctuation = document.querySelector("#chatPunctuation")
+    this.chatTextColor = document.querySelector("#chatTextColor")
+    this.chatForm = document.querySelector("#chatForm")
+    //need this below injectHTML, since it wont exist until the chat icon is clicked on
+    this.closeIcon = document.querySelector(".chat-title-bar-close")
+    this.events()
+  }
 
-    //methods
-    sendMessageToServer(){
-        // emits an event with some data to the server
-        // 1st argument is a name we choose to describe this event
-        // 2nd argument is an object with any data we want to send to the server (also have to add in app.js > io.on)
-        this.socket.emit('chatMessageFromBrowser', {
-            message: this.chatField.value, 
-            chatPunctuation: this.chatPunctuation.value,
-            chatTextColor: String(this.chatTextColor.value)
+  // Events
+  events() {
+    this.chatForm.addEventListener("submit", (e) => {
+      console.log("submit heard")
+      console.log(this.chatTextColor.value)
+      // prevent page from reloading
+      e.preventDefault()
+      this.sendMessageToServer()
+    })
+    this.chatForm.addEventListener("keydown", (e) => {
+      if (e.keyCode === 13) {
+        // prevent page from reloading
+        e.preventDefault()
+        this.sendMessageToServer()
+      }
+    })
+    this.openIcon.addEventListener("click", () => this.showChat())
+    this.closeIcon.addEventListener("click", () => this.hideChat())
+  }
 
-        })
-        this.chatLog.insertAdjacentHTML('beforeend', DOMPurify.sanitize(`
-            <div class="chat-self">
+  //methods
+  sendMessageToServer() {
+    // emits an event with some data to the server
+    // 1st argument is a name we choose to describe this event
+    // 2nd argument is an object with any data we want to send to the server (also have to add in app.js > io.on)
+    this.socket.emit("chatMessageFromBrowser", {
+      message: this.chatField.value,
+      chatPunctuation: this.chatPunctuation.value,
+      chatTextColor: String(this.chatTextColor.value)
+    })
+    this.chatLog.insertAdjacentHTML(
+      "beforeend",
+      DOMPurify.sanitize(`
+           
+        <div class="chat-self">
                 <div class="chat-message">
-                    <div class="chat-message-inner" style="color:${this.chatTextColor.value}">
-                    ${this.chatField.value}${this.chatPunctuation.value}
-                    </div>
-                </div>
-                <a href="/profile/${this.username}">
-                    <img class="chat-avatar avatar-tiny" style="background-color: ${String(this.avatarbgcolor)}" src="${this.avatar}">
-                </a>
-            </div>
-    `))
-        // auto scroll to bottom
-        this.chatLog.scrollTop = this.chatLog.scrollHeight
-        // empty the text field so its ready for new text from user
-        this.chatField.value = ''
-        
-        this.chatPunctuation.value = ''
-        // focus on the field again
-        this.chatField.focus()
-    }
+                    <div class="chat-message-inner userChatSpeechBubble sb3 " style="color:${this.chatTextColor.value}">
+                      <div class="chatRow">
+                <div class="chatMessageText"> ${this.chatField.value}${this.chatPunctuation.value}</div>  
+                      
+                      <div class="chatMessageUserIcon"><a href="/profile/${this.username}">
+                      <img class="chat-avatar avatar-tiny" style="background-color: ${String(this.avatarbgcolor)}" src="${this.avatar}">
+                </a></div> </div>
+                        
+                      <div  class="chatReactionsWrapper">
+                          <div class="chatReactions">
+                        <i class="fas fa-plus-circle"></i>
+                          chat reaction icons here
+                        </div>
+                          </div>
+                      </div>                     
+                    
+                </div>                
+        </div>    
+    `)
+    )
+    // auto scroll to bottom
+    this.chatLog.scrollTop = this.chatLog.scrollHeight
+    // empty the text field so its ready for new text from user
+    this.chatField.value = ""
 
-  
+    this.chatPunctuation.value = ""
+    // focus on the field again
+    this.chatField.focus()
+  }
 
-    
-    openConnection(){
-        // this opens a connection between browser and server
-        this.socket = io()
-        this.socket.on('welcome', (data) => {
-            this.username = data.username
-            this.avatar = data.avatar
-            this.avatarbgcolor = data.avatarbgcolor
-        
-        })
-        this.socket.on('chatMessageFromServer', (data) => {
-            //debug canDelete - works
-            //alert(data.message)
+  openConnection() {
+    // this opens a connection between browser and server
+    this.socket = io()
+    this.socket.on("welcome", (data) => {
+      this.username = data.username
+      this.avatar = data.avatar
+      this.avatarbgcolor = data.avatarbgcolor
+    })
+    this.socket.on("chatMessageFromServer", (data) => {
+      //debug canDelete - works
+      //alert(data.message)
 
-            this.displayMessageFromServer(data)
-        })
-    }
+      this.displayMessageFromServer(data)
+    })
+  }
 
-    displayMessageFromServer(data){
-        // 1st argument - where to insert HTML
-        // 2nd argument - what to insert
-        this.chatLog.insertAdjacentHTML('beforeend', DOMPurify.sanitize(`
+  displayMessageFromServer(data) {
+    // 1st argument - where to insert HTML
+    // 2nd argument - what to insert
+    this.chatLog.insertAdjacentHTML(
+      "beforeend",
+      DOMPurify.sanitize(`
         <div class="chat-other">
-        <a href="/profile/${data.username}"><img class="avatar-tiny" style="background-color: ${String(data.avatarbgcolor)}" src="${data.avatar}"></a>
-        <div class="chat-message"><div class="chat-message-inner">
-          <a style="color: ${String(data.chatTextColor)}" href="/profile/${data.username}"><strong>${data.username}:</strong></a>
-          ${data.message}${data.chatPunctuation}
-        </div></div>
-      </div>
-        `))
-        this.chatLog.scrollTop = this.chatLog.scrollHeight
         
-    }
-    
-    injectHTML() {
-        this.chatWrapper.innerHTML = `
-        <div class="chat-title-bar"><i class="fas fa-comment"></i>CatChat<span class="chat-title-bar-close"><i class="fas fa-times-circle"></i></span></div>
-        <div id="chat" class="chat-log"></div>
+        <div class="chat-message"><div class="chat-message-inner otherChatSpeechBubble sb4">
+          
+          <div class="chatRow">
+            
+            <div class="chatMessageUserIcon"><a href="/profile/${data.username}"><img class="avatar-tiny" style="background-color: ${String(data.avatarbgcolor)}" src="${data.avatar}"></a></div>
+                <div class="chatMessageText"><a style="color: ${String(data.chatTextColor)}" href="/profile/${data.username}"><strong>${data.username}:</strong></a>
+          ${data.message}${data.chatPunctuation}</div>  
+                      
+                       </div>
+                        
+                      <div  class="chatReactionsWrapper">
+                          <div class="chatReactions">
+                        <i class="fas fa-plus-circle"></i>
+                          chat reaction icons here
+                        </div>
+                          </div>
+                      </div>                        
+                    
+          </div></div>
+        `)
+    )
+    this.chatLog.scrollTop = this.chatLog.scrollHeight
+  }
 
-<form id="chatForm" class="chat-form">   
+  injectHTML() {
+    this.chatWrapper.innerHTML = `
+    <div class="chat-100wrapper"><div class="chat-title-img chatRow1"><i class="fas fa-comment"></i>CatChat<span class="chat-title-bar-close">
+    <i class="fas fa-times-circle"></i></span></div></div>   
+    <div id="chat" class="chat-log">                                    </div>
 
-        <div class="flex-dropdown-wrapper">       
-        <div class="chatElement0">        
-           <select required name="chatGreeting" id="chatField" class="dropdownText0 form-control form-control-sm">
-             <option value="" selected>Choose:</option>
+    <div class="chat-100wrapper"><div class="chat-footer-img">
+            
+            
+    <form id="chatForm" class="chat-form">  
+
+    <div class="flex-dropdown-wrapper">       
+      <div class="chatElement0">        
+        <div class="select-wrapper"><select required name="chatGreeting" id="chatField" class="dropdownText0">
+             <option value="" selected>Message!</option>
              <option value="" >- none -</option>
 
              <option value="" style="font-weight:800" >- Greetings -</option>             
@@ -270,12 +299,13 @@ export default class Chat{
             
 
            </select>
-         </div>  
+         </div>  </div>
 
-         <div class="chatElement1">
-         <select required name="chatPunctuation" id="chatPunctuation" class="dropdownText0 form-control form-control-sm">
-           <option value="" selected>Choose:</option>
-           <option value="" selected>- none -</option>
+         <div class="chatElement0">
+           <div class="select-wrapper">
+                 <select required name="chatPunctuation" id="chatPunctuation" class="dropdownText0">         
+            <option value="" selected>Emote!</option>
+            <option value="">- none -</option>
   
            <option value="" style="font-weight:800" >- Basic -</option>
            <option>!</option>
@@ -378,39 +408,37 @@ export default class Chat{
 
 
          </select>
-       </div> 
+       </div> </div>
 
          
          <div class="chatElement1">
-            <input name="catTextColor" id="chatTextColor" class="form-control form-control-sm" type="color" value="#ffffff">
+            <input name="catTextColor" id="chatTextColor" class="" type="color" value="#ffffff">
          </div>
          
-         <button type="submit" class="btn btn-sm btn-success chatSubmitButton0">
-         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-shift-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-         <path fill-rule="evenodd" d="M7.27 2.047a1 1 0 0 1 1.46 0l6.345 6.77c.6.638.146 1.683-.73 1.683H11.5v3a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-3H1.654C.78 10.5.326 9.455.924 8.816L7.27 2.047z"/>
-       </svg>       
+         <button type="submit" class="btn0-success chatSubmitButton"> 
+         <i class="fas fa-arrow-alt-circle-up"></i>   
        </button>
    </div>
  
 </form>
+</div>
+</div> </div>
         `
+  }
+
+  showChat() {
+    // this is so that a new connection is not made every time a user opens and closes the chat box. connects just once, more efficient
+    if (!this.openedYet) {
+      this.openConnection()
     }
 
-    showChat() {
-        // this is so that a new connection is not made every time a user opens and closes the chat box. connects just once, more efficient
-        if(!this.openedYet) {
-            this.openConnection()
-        }
+    this.openedYet = true
 
-        this.openedYet = true
+    this.chatWrapper.classList.add("chat--visible")
+    this.chatField.focus()
+  }
 
-        this.chatWrapper.classList.add("chat--visible")
-        this.chatField.focus()
-    }
-
-
-
-    hideChat(){
-        this.chatWrapper.classList.remove("chat--visible")
-    }
+  hideChat() {
+    this.chatWrapper.classList.remove("chat--visible")
+  }
 }
